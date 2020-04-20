@@ -13,6 +13,6 @@ public interface ListsContract {
 
 	public Object update(Long id, ListsRequest list) throws BusinessFault;
 
-	public Object delete(Long id);
+	public Object delete(Long id) throws BusinessFault;
 
 }

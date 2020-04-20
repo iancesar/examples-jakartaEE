@@ -47,9 +47,7 @@ public class ListsWS implements ListsContract {
 	@WebMethod
 	@WebResult(name = "list")
 	public Lists create(@WebParam(name = "list") @XmlElement(required = true) ListsRequest listRequest) {
-
 		Lists list = modelMapper.map(listRequest, Lists.class);
-
 		return dao.save(list);
 	}
 
@@ -67,8 +65,13 @@ public class ListsWS implements ListsContract {
 	}
 
 	@Override
-	public Object delete(Long id) {
-		// TODO Auto-generated method stub
+	@WebMethod
+	public Object delete(@WebParam(name = "id") @XmlElement(required = true) Long id) throws BusinessFault {
+		try {
+			dao.delete(id);
+		} catch (Exception e) {
+			throw new BusinessFault(ExceptionUtils.getRootCause(e).getMessage());
+		}
 		return null;
 	}
 

@@ -13,7 +13,10 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
 		<hibernate.version>5.4.14.Final</hibernate.version>
-		<!-- <hibernate.version>5.2.16.Final</hibernate.version> -->
+
+		<arquillian.version>1.4.1.Final</arquillian.version>
+		<arquillian-suite-extension.version>1.2.0</arquillian-suite-extension.version>
+		<selenium.version>3.141.59</selenium.version>
 	</properties>
 
 
@@ -61,6 +64,51 @@
 			<artifactId>commons-lang3</artifactId>
 			<version>3.10</version>
 		</dependency>
+
+
+		<!-- Tests -->
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
+			<version>5.6.2</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<version>5.6.2</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- <dependency> -->
+		<!-- <groupId>org.eu.ingwar.tools</groupId> -->
+		<!-- <artifactId>arquillian-suite-extension</artifactId> -->
+		<!-- <scope>test</scope> -->
+		<!-- </dependency> -->
+
+		<!-- <dependency> -->
+		<!-- <groupId>org.jboss.arquillian.junit</groupId> -->
+		<!-- <artifactId>arquillian-junit-container</artifactId> -->
+		<!-- <scope>test</scope> -->
+		<!-- </dependency> -->
+
+		<!-- <dependency> -->
+		<!-- <groupId>org.apache.tomee</groupId> -->
+		<!-- <artifactId>arquillian-tomee-remote</artifactId> -->
+		<!-- <version>8.0.1</version> -->
+		<!-- <scope>test</scope> -->
+		<!-- </dependency> -->
+
+		<!-- <dependency> -->
+		<!-- <groupId>org.apache.tomee</groupId> -->
+		<!-- <artifactId>apache-tomee</artifactId> -->
+		<!-- <version>8.0.1</version> -->
+		<!-- <classifier>plus</classifier> -->
+		<!-- <type>zip</type> -->
+		<!-- <scope>test</scope> -->
+		<!-- </dependency> -->
+
 
 	</dependencies>
 
