@@ -37,6 +37,31 @@
 			<version>2.9.8</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.12</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- <dependency> -->
+		<!-- <groupId>joda-time</groupId> -->
+		<!-- <artifactId>joda-time</artifactId> -->
+		<!-- <version>2.10.5</version> -->
+		<!-- </dependency> -->
+
+		<dependency>
+			<groupId>org.modelmapper</groupId>
+			<artifactId>modelmapper</artifactId>
+			<version>2.3.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.10</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -46,6 +71,50 @@
 			<plugin>
 				<artifactId>maven-war-plugin</artifactId>
 				<version>3.2.3</version>
+			</plugin>
+
+
+			<!-- Liquibase -->
+			<plugin>
+				<groupId>org.liquibase</groupId>
+				<artifactId>liquibase-maven-plugin</artifactId>
+				<version>3.8.9</version>
+				<configuration>
+					<changeLogFile>src/main/resources/db/changelog/db.changelog-master.xml</changeLogFile>
+					<url>jdbc:mysql://localhost:3307/todo-list</url>
+					<username>root</username>
+					<password>root</password>
+					<driver>com.mysql.cj.jdbc.Driver</driver>
+					<outputChangeLogFile>src/main/resources/db/outputChangeLog/liquibase-outputChangeLog.xml</outputChangeLogFile>
+					<referenceUrl>hibernate:ejb3:Mysql?dialect=org.hibernate.dialect.MySQLDialect</referenceUrl>
+					<diffChangeLogFile>src/main/resources/db/diff/${maven.build.timestamp}-diff-changelog.xml</diffChangeLogFile>
+				</configuration>
+				<dependencies>
+
+					<dependency>
+						<groupId>org.liquibase.ext</groupId>
+						<artifactId>liquibase-hibernate5</artifactId>
+						<version>3.8</version>
+					</dependency>
+
+					<dependency>
+						<groupId>javax.validation</groupId>
+						<artifactId>validation-api</artifactId>
+						<version>2.0.1.Final</version>
+					</dependency>
+
+					<dependency>
+						<groupId>mysql</groupId>
+						<artifactId>mysql-connector-java</artifactId>
+						<version>8.0.19</version>
+					</dependency>
+
+					<dependency>
+						<groupId>org.springframework</groupId>
+						<artifactId>spring-beans</artifactId>
+						<version>5.2.5.RELEASE</version>
+					</dependency>
+				</dependencies>
 			</plugin>
 		</plugins>
 	</build>

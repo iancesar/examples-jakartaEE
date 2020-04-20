@@ -3,7 +3,7 @@
 	<Resource id="Mysql" type="DataSource">
 		JtaManaged	true
 		JdbcDriver com.mysql.cj.jdbc.Driver
-		JdbcUrl jdbc:mysql://localhost:3307/cdi
+		JdbcUrl jdbc:mysql://localhost:3307/todo-list
 		UserName root
 		Password root
 		ValidationQuery	select 1		
