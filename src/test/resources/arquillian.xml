@@ -19,9 +19,12 @@
 			<property name="ajpPort">-1</property>
 			<property name="classifier">plus</property>
 			<property name="conf">src/test/tomee/conf</property>
-			<property name="lib">src/test/tomee/lib</property>
+			<property name="lib">src/test/tomee/lib/</property>
+			<!-- <property name="additionalLibs">src/test/tomee/lib/*.jar</property> -->
 			<property name="cleanOnStartUp">true</property>
 			<property name="catalina_opts">-Xmx2048m</property>
+			<!-- <property name="catalina_opts">-Djavax.persistence.provider=org.hibernate.jpa.HibernatePersistenceProvider</property> 
+				I use TomEE plus -->
 		</configuration>
 	</container>
 </arquillian>

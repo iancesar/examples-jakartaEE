@@ -28,7 +28,7 @@ public interface ShoppingListWS {
 
 	@WebMethod
 	@WebResult(name = "list", targetNamespace = "http://ws.jax.jakartaEE.com.br/", partName = "list")
-	public ShoppingListResponse get(@WebParam(partName = "id", name = "id") Long id);
+	public ShoppingListResponse get(@WebParam(partName = "id", name = "id") Long id) throws BusinessFault;;
 
 	@WebMethod
 	@WebResult(name = "return", targetNamespace = "http://ws.jax.jakartaEE.com.br/", partName = "return")

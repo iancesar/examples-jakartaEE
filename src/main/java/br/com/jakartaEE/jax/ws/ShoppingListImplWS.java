@@ -28,8 +28,14 @@ public class ShoppingListImplWS implements ShoppingListWS {
 	}
 
 	@Override
-	public ShoppingListResponse get(Long id) {
-		return service.get(id);
+	public ShoppingListResponse get(Long id) throws BusinessFault {
+		try {
+			return service.get(id);
+		} catch (Exception e) {
+			throw new BusinessFault(//
+					ExceptionUtils.getRootCause(e).getMessage(), //
+					ExceptionUtils.getRootCause(e));
+		}
 	}
 
 	@Override
@@ -42,7 +48,9 @@ public class ShoppingListImplWS implements ShoppingListWS {
 		try {
 			return service.update(id, shoppingListRequest);
 		} catch (Exception e) {
-			throw new BusinessFault(ExceptionUtils.getRootCause(e).getMessage());
+			throw new BusinessFault(//
+					ExceptionUtils.getRootCause(e).getMessage(), //
+					ExceptionUtils.getRootCause(e));
 		}
 	}
 
@@ -51,7 +59,9 @@ public class ShoppingListImplWS implements ShoppingListWS {
 		try {
 			dao.delete(id);
 		} catch (Exception e) {
-			throw new BusinessFault(ExceptionUtils.getRootCause(e).getMessage());
+			throw new BusinessFault(//
+					ExceptionUtils.getRootCause(e).getMessage(), //
+					ExceptionUtils.getRootCause(e));
 		}
 	}
 

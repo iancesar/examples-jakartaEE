@@ -20,7 +20,7 @@ import org.junit.ClassRule;
 import org.junit.Rule;
 
 @ArquillianSuiteDeployment
-public class Arquillian {
+public class Arquillian {// extends org.jboss.arquillian.testng.Arquillian {
 
 	@ArquillianResource
 	protected URL deploymentUrl;

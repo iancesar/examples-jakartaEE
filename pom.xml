@@ -14,8 +14,9 @@
 
 		<hibernate.version>5.4.14.Final</hibernate.version>
 
-		<arquillian.version>1.4.1.Final</arquillian.version>
+		<arquillian.version>1.6.0.Final</arquillian.version>
 		<arquillian-suite-extension.version>1.2.0</arquillian-suite-extension.version>
+		<version.arquillian.persistence>1.0.0.Alpha7</version.arquillian.persistence>
 		<selenium.version>3.141.59</selenium.version>
 		<tomee.version>8.0.1</tomee.version>
 
@@ -59,6 +60,7 @@
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
 			<version>${hibernate.version}</version>
+			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
@@ -89,7 +91,6 @@
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
-			<version>3.10</version>
 		</dependency>
 
 		<dependency>
@@ -109,11 +110,19 @@
 		<!-- Tests -->
 
 		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.13</version>
-			<scope>test</scope>
+		<groupId>junit</groupId>
+		<artifactId>junit</artifactId>
+		<version>4.13</version>
+		<scope>test</scope>
 		</dependency>
+
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.testng</groupId> -->
+<!-- 			<artifactId>testng</artifactId> -->
+<!-- 			<version>6.14.3</version> -->
+<!-- 			<scope>test</scope> -->
+<!-- 		</dependency> -->
+
 
 		<dependency>
 			<groupId>org.eu.ingwar.tools</groupId>
@@ -163,6 +172,20 @@
 			<type>zip</type>
 			<scope>test</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>2.6</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- <dependency> -->
+		<!-- <groupId>org.hibernate</groupId> -->
+		<!-- <artifactId>hibernate-entitymanager</artifactId> -->
+		<!-- <version>${hibernate.version}</version> -->
+		<!-- <scope>provided</scope> -->
+		<!-- </dependency> -->
 
 	</dependencies>
 
@@ -215,6 +238,7 @@
 				</plugins>
 			</build>
 		</profile>
+
 	</profiles>
 
 	<build>
