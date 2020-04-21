@@ -28,8 +28,13 @@ public class DAO<T extends Entity> {
 						.getActualTypeArguments()[0];
 	}
 
-	public T findById(Object id) {
-		return entityManager.find(persistentClass, id);
+	public Optional<T> findById(Object id) {
+
+		Optional<T> optional = Optional.ofNullable(entityManager.find(persistentClass, id));
+
+		optional.orElseThrow(() -> new BusinessException("Registro não exite"));
+
+		return optional;
 	}
 
 	public List<T> findAll() {
@@ -52,33 +57,15 @@ public class DAO<T extends Entity> {
 	}
 
 	public T update(T t) {
-
-		checkOptional(findById(t.getId()));
-
 		t = entityManager.merge(t);
 		return t;
 	}
 
 	public void delete(Object id) {
 
-		Optional<T> optional = checkOptional(findById(id));
+		Optional<T> optional = findById(id);
 
 		entityManager.remove(optional.get());
-	}
-
-	/**
-	 * Avoid try update a non exist register
-	 * 
-	 * @param optional
-	 * @return
-	 */
-	private Optional<T> checkOptional(T t) {
-
-		Optional<T> optional = Optional.ofNullable(t);
-
-		optional.orElseThrow(() -> new BusinessException("Registro não exite"));
-
-		return optional;
 	}
 
 }

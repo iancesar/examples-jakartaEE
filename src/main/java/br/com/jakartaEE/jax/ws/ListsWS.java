@@ -40,7 +40,7 @@ public class ListsWS implements ListsContract {
 	@WebMethod
 	@WebResult(name = "list")
 	public Lists get(@WebParam(name = "id") @XmlElement(required = true) Long id) {
-		return dao.findById(id);
+		return dao.findById(id).get();
 	}
 
 	@Override
