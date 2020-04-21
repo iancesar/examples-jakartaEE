@@ -7,11 +7,13 @@ import static org.junit.Assert.fail;
 
 import java.util.List;
 
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.junit.Before;
 import org.junit.Test;
 
 import br.com.jakartaEE.dto.ShoppingListRequest;
 import br.com.jakartaEE.dto.ShoppingListResponse;
+import br.com.jakartaEE.exceptions.BusinessException;
 import br.com.jakartaEE.tests.integration.Arquillian;
 import kong.unirest.GenericType;
 import kong.unirest.Unirest;
@@ -85,13 +87,27 @@ public class ShoppingListRSTest extends Arquillian {
 				.asObject(ShoppingListResponse.class)//
 				.getBody();
 
+		get();
+
 		assertNotNull(response);
 		assertNotNull(response.getId());
 		assertEquals(response.getName(), request.getName());
 	}
 
 	private void delete() {
-		// TODO Auto-generated method stub
+
+		Unirest.delete("lists/{id}")//
+				.routeParam("id", response.getId().toString())//
+				.asEmpty();
+
+		try {
+			response = Unirest.get("lists/{id}")//
+					.routeParam("id", response.getId().toString())//
+					.asObject(ShoppingListResponse.class)//
+					.getBody();
+		} catch (Exception e) {
+			assertTrue(ExceptionUtils.hasCause(e, BusinessException.class));
+		}
 
 	}
 
