@@ -14,60 +14,45 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import org.modelmapper.ModelMapper;
-
-import br.com.jakartaEE.dao.ListsDAO;
-import br.com.jakartaEE.dto.ListsRequest;
-import br.com.jakartaEE.entities.Lists;
-import br.com.jakartaEE.jax.contracts.ListsContract;
+import br.com.jakartaEE.dao.ShoppingListDAO;
+import br.com.jakartaEE.dto.ShoppingListRequest;
+import br.com.jakartaEE.services.ShoppingListService;
 
 @Path("/lists")
 @Produces(value = MediaType.APPLICATION_JSON)
 @Consumes(value = MediaType.APPLICATION_JSON)
-public class ListsRS implements ListsContract {
+public class ShoppingListRS {
 
 	@Inject
-	private ListsDAO dao;
+	private ShoppingListDAO dao;
 
 	@Inject
-	private ModelMapper modelMapper;
+	private ShoppingListService service;
 
-	@Override
 	@GET
 	public Response listAll() {
-		return Response.ok(dao.findAll()).build();
+		return Response.ok(service.listAll().getShoppingLists()).build();
 	}
 
-	@Override
 	@GET
 	@Path("/{id}")
 	@Valid
 	public Response get(@PathParam("id") Long id) {
-		return Response.ok(dao.findById(id)).build();
+		return Response.ok(service.get(id)).build();
 	}
 
-	@Override
 	@POST
-	public Response create(@Valid ListsRequest listRequest) {
-
-		Lists list = modelMapper.map(listRequest, Lists.class);
-
-		return Response.ok(dao.save(list)).build();
+	public Response create(@Valid ShoppingListRequest shoppingListRequest) {
+		return Response.ok(service.create(shoppingListRequest)).build();
 	}
 
-	@Override
 	@PATCH
 	@Path("/{id}")
 	@Valid
-	public Response update(@PathParam("id") @NotNull Long id, ListsRequest listRequest) {
-
-		Lists list = modelMapper.map(listRequest, Lists.class);
-
-		list.setId(id);
-		return Response.ok(dao.save(list)).build();
+	public Response update(@PathParam("id") @NotNull Long id, ShoppingListRequest shoppingListRequest) {
+		return Response.ok(service.update(id, shoppingListRequest)).build();
 	}
 
-	@Override
 	@DELETE
 	@Path("/{id}")
 	@Valid

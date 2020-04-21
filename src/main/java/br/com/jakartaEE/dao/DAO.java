@@ -57,6 +57,9 @@ public class DAO<T extends Entity> {
 	}
 
 	public T update(T t) {
+		
+		findById(t.getId()); //Check if regisister exists
+		
 		t = entityManager.merge(t);
 		return t;
 	}

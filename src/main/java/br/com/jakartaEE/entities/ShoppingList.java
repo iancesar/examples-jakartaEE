@@ -15,7 +15,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class Lists implements br.com.jakartaEE.entities.Entity<Long> {
+public class ShoppingList implements br.com.jakartaEE.entities.Entity<Long> {
 
 	private static final long serialVersionUID = 1L;
 
@@ -28,5 +28,13 @@ public class Lists implements br.com.jakartaEE.entities.Entity<Long> {
 	@NotEmpty
 	@Size(max = 100)
 	private String name;
+
+	public ShoppingList() {
+	}
+
+	public ShoppingList(Long id, String name) {
+		this.id = id;
+		this.name = name;
+	}
 
 }

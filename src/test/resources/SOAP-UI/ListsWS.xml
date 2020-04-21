@@ -1,76 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<con:soapui-project id="1b815d83-5822-488b-bacf-0a87fd0c2b06" activeEnvironment="Default" name="ListsWS?wsdl" soapui-version="5.5.0" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="43c1d163-556e-4b48-ba69-5371ed803363" wsaVersion="NONE" name="ListsWSServiceSoapBinding" type="wsdl" bindingName="{http://ws.jax.jakartaEE.com.br/}ListsWSServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:8080/jakartaEE/webservices/ListsWS?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8080/jakartaEE/webservices/ListsWS?wsdl"><con:part><con:url>http://localhost:8080/jakartaEE/webservices/ListsWS?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="ListsWSService" targetNamespace="http://ws.jax.jakartaEE.com.br/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://ws.jax.jakartaEE.com.br/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http">
+<con:soapui-project id="1b815d83-5822-488b-bacf-0a87fd0c2b06" activeEnvironment="Default" name="ListsWS?wsdl" soapui-version="5.5.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="43c1d163-556e-4b48-ba69-5371ed803363" wsaVersion="NONE" name="ShoppingListImplWSServiceSoapBinding" type="wsdl" bindingName="{http://ws.jax.jakartaEE.com.br/}ShoppingListImplWSServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:8080/jakartaEE/webservices/ShoppingListWS?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8080/jakartaEE/webservices/ShoppingListWS?wsdl"><con:part><con:url>http://localhost:8080/jakartaEE/webservices/ShoppingListWS?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="ShoppingListImplWSService" targetNamespace="http://ws.jax.jakartaEE.com.br/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://ws.jax.jakartaEE.com.br/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http">
   <wsdl:types>
     <xs:schema attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://ws.jax.jakartaEE.com.br/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-      <xs:element name="create" type="tns:create"/>
-      <xs:element name="createResponse" type="tns:createResponse"/>
-      <xs:element name="delete" type="tns:delete"/>
-      <xs:element name="deleteResponse" type="tns:deleteResponse"/>
-      <xs:element name="get" type="tns:get"/>
-      <xs:element name="getResponse" type="tns:getResponse"/>
-      <xs:element name="listAll" type="tns:listAll"/>
-      <xs:element name="listAllResponse" type="tns:listAllResponse"/>
-      <xs:element name="listsRequest" type="tns:listsRequest"/>
-      <xs:element name="update" type="tns:update"/>
-      <xs:element name="updateResponse" type="tns:updateResponse"/>
-      <xs:complexType name="listAll">
-        <xs:sequence/>
-      </xs:complexType>
-      <xs:complexType name="listAllResponse">
-        <xs:sequence>
-          <xs:element maxOccurs="unbounded" minOccurs="0" name="list" type="tns:lists"/>
-        </xs:sequence>
-      </xs:complexType>
-      <xs:complexType name="lists">
+      <xs:element name="request" nillable="true" type="xs:anyType"/>
+      <xs:complexType name="shoppingListResponse">
         <xs:sequence>
           <xs:element minOccurs="0" name="id" type="xs:long"/>
           <xs:element minOccurs="0" name="name" type="xs:string"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="shoppingLists" type="tns:shoppingListResponse"/>
         </xs:sequence>
       </xs:complexType>
-      <xs:complexType name="create">
-        <xs:sequence>
-          <xs:element name="list" type="tns:listsRequest"/>
-        </xs:sequence>
-      </xs:complexType>
-      <xs:complexType name="listsRequest">
+      <xs:complexType name="shoppingListRequest">
         <xs:sequence>
           <xs:element name="name" type="xs:string"/>
-        </xs:sequence>
-      </xs:complexType>
-      <xs:complexType name="createResponse">
-        <xs:sequence>
-          <xs:element minOccurs="0" name="list" type="tns:lists"/>
-        </xs:sequence>
-      </xs:complexType>
-      <xs:complexType name="update">
-        <xs:sequence>
-          <xs:element name="id" type="xs:long"/>
-          <xs:element name="list" type="tns:listsRequest"/>
-        </xs:sequence>
-      </xs:complexType>
-      <xs:complexType name="updateResponse">
-        <xs:sequence>
-          <xs:element minOccurs="0" name="list" type="tns:lists"/>
-        </xs:sequence>
-      </xs:complexType>
-      <xs:complexType name="get">
-        <xs:sequence>
-          <xs:element name="id" type="xs:long"/>
-        </xs:sequence>
-      </xs:complexType>
-      <xs:complexType name="getResponse">
-        <xs:sequence>
-          <xs:element minOccurs="0" name="list" type="tns:lists"/>
-        </xs:sequence>
-      </xs:complexType>
-      <xs:complexType name="delete">
-        <xs:sequence>
-          <xs:element name="id" type="xs:long"/>
-        </xs:sequence>
-      </xs:complexType>
-      <xs:complexType name="deleteResponse">
-        <xs:sequence>
-          <xs:element minOccurs="0" name="return" type="xs:anyType"/>
         </xs:sequence>
       </xs:complexType>
       <xs:element name="BusinessFault" type="tns:BusinessFault"/>
@@ -81,40 +23,37 @@
       </xs:complexType>
     </xs:schema>
   </wsdl:types>
-  <wsdl:message name="listAll">
-    <wsdl:part element="tns:listAll" name="parameters"></wsdl:part>
-  </wsdl:message>
+  <wsdl:message name="listAll"></wsdl:message>
   <wsdl:message name="create">
-    <wsdl:part element="tns:create" name="parameters"></wsdl:part>
+    <wsdl:part name="list" type="tns:shoppingListRequest"></wsdl:part>
   </wsdl:message>
   <wsdl:message name="createResponse">
-    <wsdl:part element="tns:createResponse" name="parameters"></wsdl:part>
+    <wsdl:part name="list" type="tns:shoppingListResponse"></wsdl:part>
   </wsdl:message>
   <wsdl:message name="update">
-    <wsdl:part element="tns:update" name="parameters"></wsdl:part>
+    <wsdl:part name="id" type="xsd:long"></wsdl:part>
+    <wsdl:part name="list" type="tns:shoppingListRequest"></wsdl:part>
   </wsdl:message>
   <wsdl:message name="updateResponse">
-    <wsdl:part element="tns:updateResponse" name="parameters"></wsdl:part>
+    <wsdl:part name="list" type="tns:shoppingListResponse"></wsdl:part>
   </wsdl:message>
   <wsdl:message name="delete">
-    <wsdl:part element="tns:delete" name="parameters"></wsdl:part>
+    <wsdl:part name="id" type="xsd:long"></wsdl:part>
   </wsdl:message>
   <wsdl:message name="BusinessFault">
     <wsdl:part element="tns:BusinessFault" name="BusinessFault"></wsdl:part>
   </wsdl:message>
   <wsdl:message name="getResponse">
-    <wsdl:part element="tns:getResponse" name="parameters"></wsdl:part>
+    <wsdl:part name="list" type="tns:shoppingListResponse"></wsdl:part>
   </wsdl:message>
   <wsdl:message name="get">
-    <wsdl:part element="tns:get" name="parameters"></wsdl:part>
+    <wsdl:part name="id" type="xsd:long"></wsdl:part>
   </wsdl:message>
   <wsdl:message name="listAllResponse">
-    <wsdl:part element="tns:listAllResponse" name="parameters"></wsdl:part>
+    <wsdl:part name="list" type="tns:shoppingListResponse"></wsdl:part>
   </wsdl:message>
-  <wsdl:message name="deleteResponse">
-    <wsdl:part element="tns:deleteResponse" name="parameters"></wsdl:part>
-  </wsdl:message>
-  <wsdl:portType name="ListsWS">
+  <wsdl:message name="deleteResponse"></wsdl:message>
+  <wsdl:portType name="ShoppingListWS">
     <wsdl:operation name="listAll">
       <wsdl:input message="tns:listAll" name="listAll"></wsdl:input>
       <wsdl:output message="tns:listAllResponse" name="listAllResponse"></wsdl:output>
@@ -138,66 +77,66 @@
       <wsdl:fault message="tns:BusinessFault" name="BusinessFault"></wsdl:fault>
     </wsdl:operation>
   </wsdl:portType>
-  <wsdl:binding name="ListsWSServiceSoapBinding" type="tns:ListsWS">
-    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+  <wsdl:binding name="ShoppingListImplWSServiceSoapBinding" type="tns:ShoppingListWS">
+    <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
     <wsdl:operation name="listAll">
-      <soap:operation soapAction="" style="document"/>
+      <soap:operation soapAction="" style="rpc"/>
       <wsdl:input name="listAll">
-        <soap:body use="literal"/>
+        <soap:body namespace="http://ws.jax.jakartaEE.com.br/" use="literal"/>
       </wsdl:input>
       <wsdl:output name="listAllResponse">
-        <soap:body use="literal"/>
+        <soap:body namespace="http://ws.jax.jakartaEE.com.br/" use="literal"/>
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="create">
-      <soap:operation soapAction="" style="document"/>
+      <soap:operation soapAction="" style="rpc"/>
       <wsdl:input name="create">
-        <soap:body use="literal"/>
+        <soap:body namespace="http://ws.jax.jakartaEE.com.br/" use="literal"/>
       </wsdl:input>
       <wsdl:output name="createResponse">
-        <soap:body use="literal"/>
+        <soap:body namespace="http://ws.jax.jakartaEE.com.br/" use="literal"/>
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="update">
-      <soap:operation soapAction="" style="document"/>
+      <soap:operation soapAction="" style="rpc"/>
       <wsdl:input name="update">
-        <soap:body use="literal"/>
+        <soap:body namespace="http://ws.jax.jakartaEE.com.br/" use="literal"/>
       </wsdl:input>
       <wsdl:output name="updateResponse">
-        <soap:body use="literal"/>
+        <soap:body namespace="http://ws.jax.jakartaEE.com.br/" use="literal"/>
       </wsdl:output>
       <wsdl:fault name="BusinessFault">
         <soap:fault name="BusinessFault" use="literal"/>
       </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="get">
-      <soap:operation soapAction="" style="document"/>
+      <soap:operation soapAction="" style="rpc"/>
       <wsdl:input name="get">
-        <soap:body use="literal"/>
+        <soap:body namespace="http://ws.jax.jakartaEE.com.br/" use="literal"/>
       </wsdl:input>
       <wsdl:output name="getResponse">
-        <soap:body use="literal"/>
+        <soap:body namespace="http://ws.jax.jakartaEE.com.br/" use="literal"/>
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="delete">
-      <soap:operation soapAction="" style="document"/>
+      <soap:operation soapAction="" style="rpc"/>
       <wsdl:input name="delete">
-        <soap:body use="literal"/>
+        <soap:body namespace="http://ws.jax.jakartaEE.com.br/" use="literal"/>
       </wsdl:input>
       <wsdl:output name="deleteResponse">
-        <soap:body use="literal"/>
+        <soap:body namespace="http://ws.jax.jakartaEE.com.br/" use="literal"/>
       </wsdl:output>
       <wsdl:fault name="BusinessFault">
         <soap:fault name="BusinessFault" use="literal"/>
       </wsdl:fault>
     </wsdl:operation>
   </wsdl:binding>
-  <wsdl:service name="ListsWSService">
-    <wsdl:port binding="tns:ListsWSServiceSoapBinding" name="ListsWSPort">
-      <soap:address location="http://localhost:8080/jakartaEE/webservices/ListsWS"/>
+  <wsdl:service name="ShoppingListImplWSService">
+    <wsdl:port binding="tns:ShoppingListImplWSServiceSoapBinding" name="ShoppingListImplWSPort">
+      <soap:address location="http://localhost:8080/jakartaEE/webservices/ShoppingListWS"/>
     </wsdl:port>
   </wsdl:service>
-</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:8080/jakartaEE/webservices/ListsWS</con:endpoint></con:endpoints><con:operation id="233807e8-3acd-4673-8159-bde327941420" isOneWay="false" action="" name="create" bindingOperationName="create" type="Request-Response" outputName="createResponse" inputName="create" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="6eb907ef-53f8-44e7-bb41-cc1ab20a85a5" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/jakartaEE/webservices/ListsWS</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.jax.jakartaEE.com.br/">
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:8080/jakartaEE/webservices/ListsWS</con:endpoint><con:endpoint>http://localhost:8080/jakartaEE/webservices/ShoppingListWS</con:endpoint></con:endpoints><con:operation id="233807e8-3acd-4673-8159-bde327941420" isOneWay="false" action="" name="create" bindingOperationName="create" type="Request-Response" outputName="createResponse" inputName="create" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="6eb907ef-53f8-44e7-bb41-cc1ab20a85a5" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/jakartaEE/webservices/ShoppingListWS</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.jax.jakartaEE.com.br/">
    <soapenv:Header/>
    <soapenv:Body>
       <ws:create>
@@ -206,30 +145,30 @@
          </list>
       </ws:create>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.jax.jakartaEE.com.br/ListsWS/create"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="ef70e647-6369-4706-b018-a9dfc1306186" isOneWay="false" action="" name="delete" bindingOperationName="delete" type="Request-Response" outputName="deleteResponse" inputName="delete" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="ee630e73-b266-4563-8c36-e35874851366" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/jakartaEE/webservices/ListsWS</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.jax.jakartaEE.com.br/">
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.jax.jakartaEE.com.br/ListsWS/create"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="ef70e647-6369-4706-b018-a9dfc1306186" isOneWay="false" action="" name="delete" bindingOperationName="delete" type="Request-Response" outputName="deleteResponse" inputName="delete" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="ee630e73-b266-4563-8c36-e35874851366" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/jakartaEE/webservices/ShoppingListWS</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.jax.jakartaEE.com.br/">
    <soapenv:Header/>
    <soapenv:Body>
       <ws:delete>
-         <id>10</id>
+         <id>2</id>
       </ws:delete>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.jax.jakartaEE.com.br/ListsWS/delete"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="e6187e4c-e539-47ee-9e88-6e5615b3a4ca" isOneWay="false" action="" name="get" bindingOperationName="get" type="Request-Response" outputName="getResponse" inputName="get" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="2ea6a812-710a-4f41-9a21-58258a36b7d7" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/jakartaEE/webservices/ListsWS</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.jax.jakartaEE.com.br/">
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.jax.jakartaEE.com.br/ListsWS/delete"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="e6187e4c-e539-47ee-9e88-6e5615b3a4ca" isOneWay="false" action="" name="get" bindingOperationName="get" type="Request-Response" outputName="getResponse" inputName="get" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="2ea6a812-710a-4f41-9a21-58258a36b7d7" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/jakartaEE/webservices/ShoppingListWS</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.jax.jakartaEE.com.br/">
    <soapenv:Header/>
    <soapenv:Body>
       <ws:get>
-         <id>?</id>
+         <id>1</id>
       </ws:get>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.jax.jakartaEE.com.br/ListsWS/get"/></con:call></con:operation><con:operation id="1115b7d8-a718-474f-bbb8-9adade861ae8" isOneWay="false" action="" name="listAll" bindingOperationName="listAll" type="Request-Response" outputName="listAllResponse" inputName="listAll" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="f46683d8-c84a-4573-aae8-4bd92eae4f52" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/jakartaEE/webservices/ListsWS</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.jax.jakartaEE.com.br/">
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.jax.jakartaEE.com.br/ListsWS/get"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="1115b7d8-a718-474f-bbb8-9adade861ae8" isOneWay="false" action="" name="listAll" bindingOperationName="listAll" type="Request-Response" outputName="listAllResponse" inputName="listAll" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="f46683d8-c84a-4573-aae8-4bd92eae4f52" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/jakartaEE/webservices/ShoppingListWS</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.jax.jakartaEE.com.br/">
    <soapenv:Header/>
    <soapenv:Body>
       <ws:listAll/>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.jax.jakartaEE.com.br/ListsWS/listAll"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="d671d609-01ca-408d-b0fa-467c694f8f7e" isOneWay="false" action="" name="update" bindingOperationName="update" type="Request-Response" outputName="updateResponse" inputName="update" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="ebb72440-1ce4-42f3-a8f5-65bfe9b3187b" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/jakartaEE/webservices/ListsWS</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.jax.jakartaEE.com.br/">
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.jax.jakartaEE.com.br/ListsWS/listAll"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="d671d609-01ca-408d-b0fa-467c694f8f7e" isOneWay="false" action="" name="update" bindingOperationName="update" type="Request-Response" outputName="updateResponse" inputName="update" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="ebb72440-1ce4-42f3-a8f5-65bfe9b3187b" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/jakartaEE/webservices/ShoppingListWS</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.jax.jakartaEE.com.br/">
    <soapenv:Header/>
    <soapenv:Body>
       <ws:update>
-         <id>25</id>
+         <id>2</id>
          <list>
             <name>atualizando via SOAP</name>
          </list>
