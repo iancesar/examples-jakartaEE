@@ -53,4 +53,19 @@ public class Arquillian {// extends org.jboss.arquillian.testng.Arquillian {
 		}
 	}
 
+//	protected WebTarget createWebTarger(String endpoint) {
+//		try {
+//			Client client = ClientBuilder.newClient();
+//			WebTarget webTarget = client.target(String.format(deploymentUrl + "%s"));
+//			return webTarget;
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			throw e;
+//		}
+//	}
+
+	protected String getRestEndpoint(String resource) {
+		return String.format(deploymentUrl + "%s", resource);
+	}
+
 }

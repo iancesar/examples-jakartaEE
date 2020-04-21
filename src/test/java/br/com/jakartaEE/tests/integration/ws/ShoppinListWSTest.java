@@ -1,4 +1,4 @@
-package br.com.jakartaEE.tests.integration;
+package br.com.jakartaEE.tests.integration.ws;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -14,9 +14,10 @@ import br.com.jakartaEE.dto.ShoppingListRequest;
 import br.com.jakartaEE.dto.ShoppingListResponse;
 import br.com.jakartaEE.exceptions.BusinessFault;
 import br.com.jakartaEE.jax.ws.ShoppingListWS;
+import br.com.jakartaEE.tests.integration.Arquillian;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class ShoppinListWSIT extends Arquillian {
+public class ShoppinListWSTest extends Arquillian {
 
 	private ShoppingListWS ws;
 

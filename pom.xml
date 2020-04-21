@@ -110,18 +110,18 @@
 		<!-- Tests -->
 
 		<dependency>
-		<groupId>junit</groupId>
-		<artifactId>junit</artifactId>
-		<version>4.13</version>
-		<scope>test</scope>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.13</version>
+			<scope>test</scope>
 		</dependency>
 
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.testng</groupId> -->
-<!-- 			<artifactId>testng</artifactId> -->
-<!-- 			<version>6.14.3</version> -->
-<!-- 			<scope>test</scope> -->
-<!-- 		</dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>org.testng</groupId> -->
+		<!-- <artifactId>testng</artifactId> -->
+		<!-- <version>6.14.3</version> -->
+		<!-- <scope>test</scope> -->
+		<!-- </dependency> -->
 
 
 		<dependency>
@@ -180,12 +180,12 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!-- <dependency> -->
-		<!-- <groupId>org.hibernate</groupId> -->
-		<!-- <artifactId>hibernate-entitymanager</artifactId> -->
-		<!-- <version>${hibernate.version}</version> -->
-		<!-- <scope>provided</scope> -->
-		<!-- </dependency> -->
+		<dependency>
+			<groupId>com.konghq</groupId>
+			<artifactId>unirest-java</artifactId>
+			<version>3.7.02</version>
+			<scope>test</scope>
+		</dependency>
 
 	</dependencies>
 
