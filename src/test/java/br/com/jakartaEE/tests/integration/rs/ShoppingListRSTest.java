@@ -7,106 +7,122 @@ import static org.junit.Assert.fail;
 
 import java.util.List;
 
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.GenericType;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+
 import br.com.jakartaEE.dto.ShoppingListRequest;
 import br.com.jakartaEE.dto.ShoppingListResponse;
-import br.com.jakartaEE.exceptions.BusinessException;
 import br.com.jakartaEE.tests.integration.Arquillian;
-import kong.unirest.GenericType;
-import kong.unirest.Unirest;
 
-public class ShoppingListRSTest extends Arquillian {
+public class ShoppingListRSTest extends Arquillian
+{
 
-	private ShoppingListResponse response;
+	private ShoppingListResponse	shoppingListResponse;
+
+	private WebTarget					target;
 
 	@Before
-	public void init() {
-		Unirest.config().defaultBaseUrl(deploymentUrl.toString());
-		Unirest.config().addDefaultHeader("Content-Type", "application/json");
+	public void init()
+	{
+		target = createWebTarger().path("lists");
 	}
 
 	@Test
-	public void test() {
+	public void test()
+	{
 
-		try {
+		try
+		{
 			create();
 			get();
 			listAll();
 			update();
 			delete();
-		} catch (Exception e) {
+		}
+		catch(Exception e)
+		{
 			e.printStackTrace();
 			fail();
 		}
 	}
 
-	private void create() {
+	private void create() throws JsonProcessingException
+	{
 		ShoppingListRequest request = new ShoppingListRequest();
 		request.setName("Teste unitario rest");
 
-		response = Unirest.post("lists")//
-				.body(request)//
-				.asObject(ShoppingListResponse.class)//
-				.getBody();
+		shoppingListResponse = target.request().post(Entity.entity(request, MediaType.APPLICATION_JSON), ShoppingListResponse.class);
 
-		assertNotNull(response);
-		assertNotNull(response.getId());
+		assertNotNull(shoppingListResponse.getId());
 	}
 
-	private void get() {
-		response = Unirest.get("lists/{id}")//
-				.routeParam("id", response.getId().toString())//
-				.asObject(ShoppingListResponse.class)//
-				.getBody();
+	private void get()
+	{
 
-		assertNotNull(response);
-		assertNotNull(response.getId());
+		WebTarget getTarget = target.path("{id}");
+
+		shoppingListResponse = getTarget.resolveTemplate("id", shoppingListResponse.getId()).request().get(ShoppingListResponse.class);
+
+		assertNotNull(shoppingListResponse);
+		assertNotNull(shoppingListResponse.getId());
 
 	}
 
-	private void listAll() {
+	private void listAll()
+	{
 
-		List<ShoppingListResponse> response = Unirest.get("lists")//
-				.asObject(new GenericType<List<ShoppingListResponse>>() {
-				}).getBody();
+		List<ShoppingListResponse> response = target.request().get(new GenericType<List<ShoppingListResponse>>()
+		{
+		});
 
 		assertNotNull(response);
 		assertTrue(!response.isEmpty());
 	}
 
-	private void update() {
+	private void update()
+	{
 		ShoppingListRequest request = new ShoppingListRequest();
 		request.setName("Atualiazado teste unitario rest");
 
-		response = Unirest.patch("lists/{id}")//
-				.routeParam("id", response.getId().toString())//
-				.body(request)//
-				.asObject(ShoppingListResponse.class)//
-				.getBody();
+		WebTarget patchTarget = target.path("{id}");
+
+		shoppingListResponse = patchTarget//
+			.resolveTemplate("id", shoppingListResponse.getId())//
+			.request()//
+			.method("PATCH", Entity.entity(request, MediaType.APPLICATION_JSON), ShoppingListResponse.class);
 
 		get();
 
-		assertNotNull(response);
-		assertNotNull(response.getId());
-		assertEquals(response.getName(), request.getName());
+		assertNotNull(shoppingListResponse);
+		assertNotNull(shoppingListResponse.getId());
+		assertEquals(shoppingListResponse.getName(), request.getName());
 	}
 
-	private void delete() {
+	private void delete()
+	{
 
-		Unirest.delete("lists/{id}")//
-				.routeParam("id", response.getId().toString())//
-				.asEmpty();
+		WebTarget deleteTarget = target.path("{id}");
 
-		try {
-			response = Unirest.get("lists/{id}")//
-					.routeParam("id", response.getId().toString())//
-					.asObject(ShoppingListResponse.class)//
-					.getBody();
-		} catch (Exception e) {
-			assertTrue(ExceptionUtils.hasCause(e, BusinessException.class));
+		Response response = deleteTarget.resolveTemplate("id", shoppingListResponse.getId()).request().delete();
+
+		assertEquals(response.getStatus(), 200);
+
+		try
+		{
+			get();
+		}
+		catch(Exception e)
+		{
+			assertTrue(ExceptionUtils.getMessage(e).contains("HTTP 400 Bad Request"));
 		}
 
 	}

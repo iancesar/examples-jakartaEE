@@ -2,29 +2,13 @@
 	version="1.0">
 
 	<persistence-unit name="Mysql" transaction-type="JTA">
-		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-
 		<jta-data-source>Mysql</jta-data-source>
 
 		<properties>
-			<property name="hibernate.dialect"
-				value="org.hibernate.dialect.MySQLDialect" />
+			<property name="openjpa.jdbc.SynchronizeMappings"
+				value="buildSchema(ForeignKeys=true)" />
 
 			<property name="tomee.jpa.factory.lazy" value="true" />
-			<property name="hibernate.temp.use_jdbc_metadata_defaults"
-				value="false" />
-
-			<property name="transaction.factory_class"
-				value="org.hibernate.transaction.JTATransactionFactory" />
-
-			<property name="hibernate.physical_naming_strategy"
-				value="com.vladmihalcea.hibernate.type.util.CamelCaseToSnakeCaseNamingStrategy" />
-
-			<property name="hibernate.show_sql" value="true" />
-
-			<property name="hibernate.format_sql" value="true" />
-
-			<property name="hibernate.use_sql_comments" value="false" />
 		</properties>
 	</persistence-unit>
 </persistence>

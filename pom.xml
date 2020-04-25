@@ -12,13 +12,13 @@
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-		<hibernate.version>5.4.14.Final</hibernate.version>
-
 		<arquillian.version>1.6.0.Final</arquillian.version>
 		<arquillian-suite-extension.version>1.2.0</arquillian-suite-extension.version>
 		<version.arquillian.persistence>1.0.0.Alpha7</version.arquillian.persistence>
 		<selenium.version>3.141.59</selenium.version>
 		<tomee.version>8.0.1</tomee.version>
+
+		<cxf.version>3.3.4</cxf.version>
 
 	</properties>
 
@@ -57,30 +57,11 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-core</artifactId>
-			<version>${hibernate.version}</version>
-			<scope>provided</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>com.vladmihalcea</groupId>
-			<artifactId>hibernate-types-52</artifactId>
-			<version>2.9.8</version>
-		</dependency>
-
-		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<version>1.18.12</version>
 			<scope>provided</scope>
 		</dependency>
-
-		<!-- <dependency> -->
-		<!-- <groupId>joda-time</groupId> -->
-		<!-- <artifactId>joda-time</artifactId> -->
-		<!-- <version>2.10.5</version> -->
-		<!-- </dependency> -->
 
 		<dependency>
 			<groupId>org.modelmapper</groupId>
@@ -95,17 +76,30 @@
 
 		<dependency>
 			<groupId>org.apache.johnzon</groupId>
-			<artifactId>johnzon-core</artifactId>
+			<artifactId>johnzon-mapper</artifactId>
 			<version>1.1.13</version>
 			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.apache.johnzon</groupId>
-			<artifactId>johnzon-mapper</artifactId>
+			<artifactId>johnzon-jaxrs</artifactId>
 			<version>1.1.13</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-rs-client</artifactId>
+			<version>${cxf.version}</version>
 			<scope>provided</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.6</version>
+		</dependency>
+
 
 		<!-- Tests -->
 
@@ -115,14 +109,6 @@
 			<version>4.13</version>
 			<scope>test</scope>
 		</dependency>
-
-		<!-- <dependency> -->
-		<!-- <groupId>org.testng</groupId> -->
-		<!-- <artifactId>testng</artifactId> -->
-		<!-- <version>6.14.3</version> -->
-		<!-- <scope>test</scope> -->
-		<!-- </dependency> -->
-
 
 		<dependency>
 			<groupId>org.eu.ingwar.tools</groupId>
@@ -135,27 +121,6 @@
 			<artifactId>arquillian-junit-container</artifactId>
 			<scope>test</scope>
 		</dependency>
-
-		<!-- <dependency> -->
-		<!-- <groupId>org.seleniumhq.selenium</groupId> -->
-		<!-- <artifactId>selenium-support</artifactId> -->
-		<!-- <version>${selenium.version}</version> -->
-		<!-- <scope>test</scope> -->
-		<!-- </dependency> -->
-
-		<!-- <dependency> -->
-		<!-- <groupId>org.seleniumhq.selenium</groupId> -->
-		<!-- <artifactId>selenium-chrome-driver</artifactId> -->
-		<!-- <version>${selenium.version}</version> -->
-		<!-- <scope>test</scope> -->
-		<!-- </dependency> -->
-
-		<!-- <dependency> -->
-		<!-- <groupId>org.seleniumhq.selenium</groupId> -->
-		<!-- <artifactId>selenium-firefox-driver</artifactId> -->
-		<!-- <version>${selenium.version}</version> -->
-		<!-- <scope>test</scope> -->
-		<!-- </dependency> -->
 
 		<dependency>
 			<groupId>org.apache.tomee</groupId>
@@ -179,67 +144,7 @@
 			<version>2.6</version>
 			<scope>test</scope>
 		</dependency>
-
-		<dependency>
-			<groupId>com.konghq</groupId>
-			<artifactId>unirest-java</artifactId>
-			<version>3.7.02</version>
-			<scope>test</scope>
-		</dependency>
-
 	</dependencies>
-
-
-	<profiles>
-		<profile>
-			<id>gerarCodigo</id>
-			<build>
-				<plugins>
-					<!-- CXF -->
-					<plugin>
-						<groupId>org.apache.cxf</groupId>
-						<artifactId>cxf-codegen-plugin</artifactId>
-						<version>3.3.6</version>
-						<executions>
-							<execution>
-								<id>wsdl2java</id>
-								<phase>generate-sources</phase>
-								<configuration>
-									<fork>always</fork>
-									<additionalJvmArgs>-Djavax.xml.accessExternalDTD=all</additionalJvmArgs>
-									<sourceRoot>${project.basedir}/src/test/java</sourceRoot>
-
-									<wsdlOptions>
-										<wsdlOption>
-											<wsdl>${project.basedir}/src/test/resources/ListsWS.wsdl</wsdl>
-											<!-- <bindingFiles> -->
-											<!-- <bindingFile>${project.basedir}/src/main/resources/bind.xml</bindingFile> -->
-											<!-- </bindingFiles> -->
-											<extraargs>
-												<extraarg>-p</extraarg>
-												<extraarg>br.com.jakartaEE.tests.ws</extraarg>
-											</extraargs>
-										</wsdlOption>
-									</wsdlOptions>
-								</configuration>
-								<goals>
-									<goal>wsdl2java</goal>
-								</goals>
-							</execution>
-						</executions>
-						<dependencies>
-							<dependency>
-								<groupId>com.github.krasa</groupId>
-								<artifactId>krasa-jaxb-tools</artifactId>
-								<version>1.5</version>
-							</dependency>
-						</dependencies>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-
-	</profiles>
 
 	<build>
 		<finalName>shopping-list</finalName>
@@ -252,27 +157,8 @@
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.22.2</version>
-				<configuration>
-					<systemPropertyVariables>
-						<java.awt.headless>true</java.awt.headless>
-					</systemPropertyVariables>
-				</configuration>
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-failsafe-plugin</artifactId>
 				<version>2.22.2</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>integration-test</goal>
-							<goal>verify</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 
 			<!-- Liquibase -->
@@ -291,6 +177,12 @@
 					<diffChangeLogFile>src/main/resources/db/diff/${maven.build.timestamp}-diff-changelog.xml</diffChangeLogFile>
 				</configuration>
 				<dependencies>
+
+					<!-- <dependency> -->
+					<!-- <groupId>com.vladmihalcea</groupId> -->
+					<!-- <artifactId>hibernate-types-52</artifactId> -->
+					<!-- <version>2.9.8</version> -->
+					<!-- </dependency> -->
 
 					<dependency>
 						<groupId>org.liquibase.ext</groupId>

@@ -14,21 +14,24 @@ import br.com.jakartaEE.entities.Entity;
 import br.com.jakartaEE.exceptions.BusinessException;
 
 @SuppressWarnings("rawtypes")
-public class DAO<T extends Entity> {
+public class DAO<T extends Entity>
+{
 
 	@PersistenceContext
-	private EntityManager entityManager;
+	private EntityManager	entityManager;
 
-	private Class<T> persistentClass;
+	private Class<T>			persistentClass;
 
 	@SuppressWarnings("unchecked")
-	public DAO() {
+	public DAO()
+	{
 		this.persistentClass = (Class<T>) ((ParameterizedType) getClass()//
-				.getGenericSuperclass())//
-						.getActualTypeArguments()[0];
+			.getGenericSuperclass())//
+				.getActualTypeArguments()[0];
 	}
 
-	public Optional<T> findById(Object id) {
+	public Optional<T> findById(Object id)
+	{
 
 		Optional<T> optional = Optional.ofNullable(entityManager.find(persistentClass, id));
 
@@ -37,7 +40,8 @@ public class DAO<T extends Entity> {
 		return optional;
 	}
 
-	public List<T> findAll() {
+	public List<T> findAll()
+	{
 		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 		CriteriaQuery<T> query = builder.createQuery(persistentClass);
 		Root<T> root = query.from(persistentClass);
@@ -47,24 +51,31 @@ public class DAO<T extends Entity> {
 
 	}
 
-	public T save(T t) {
-		if (t.getId() != null) {
+	public T save(T t)
+	{
+		if(t.getId() != null)
+		{
 			t = update(t);
-		} else {
+		}
+		else
+		{
 			entityManager.persist(t);
 		}
+		entityManager.flush();
 		return t;
 	}
 
-	public T update(T t) {
-		
+	public T update(T t)
+	{
+
 		findById(t.getId()); //Check if regisister exists
-		
+
 		t = entityManager.merge(t);
 		return t;
 	}
 
-	public void delete(Object id) {
+	public void delete(Object id)
+	{
 
 		Optional<T> optional = findById(id);
 
